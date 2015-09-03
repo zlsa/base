@@ -11,8 +11,13 @@ $(document).ready(function() {
   $(window).resize(resize);
   tick();
 
-  loader.append(new JSONAsset('/test.json'));
+  var foo = new JSONAsset('/foo.json');
+  var bar = new JSONAsset('/bar.json');
+
+  var aw = new AssetWaiter(foo, bar);
   
+  loader.append(foo, bar);
+
   loader.on('statuschange', function() {
     if(loader.get_status() == Loader.STATUS.FINISHED) {
       tick();

@@ -1,30 +1,15 @@
 
-var Asset = Thing.extend({
+var Asset = Status.extend({
 
   init: function(url) {
     this._super();
 
+    this.status_root = Asset;
+    this.type = 'asset';
+
     this.status = Asset.STATUS.WAITING;
 
     this.url = url;
-  },
-
-  /* STATUS */
-
-  set_status: function(status) {
-    var old_status = this.status;
-
-    this.status = status;
-    
-    log.d('asset #' + this.id + ' status changed from ' + Asset.status_string(old_status) + ' to ' + Asset.status_string(status));
-    
-    this.fire('statuschange', { asset: this,
-                                old_status: old_status,
-                                status: status });
-  },
-  
-  get_status: function() {
-    return this.status;
   },
 
   /* ASSET STUFF */

@@ -44,6 +44,8 @@ module.exports = function(grunt) {
           'src/js/asset.js',
           'src/js/loader.js',
           
+          'src/js/asset-waiter.js',
+          
           'src/js/main.js',
         ],
         dest: 'build/bundle.min.js',

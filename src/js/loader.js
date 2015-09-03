@@ -1,8 +1,11 @@
 
-var Loader = Thing.extend({
+var Loader = Status.extend({
   
   init: function(settings) {
     this._super();
+
+    this.status_root = Loader;
+    this.type = 'loader';
 
     this.settings = {
       max_concurrent: 4,
@@ -20,26 +23,6 @@ var Loader = Thing.extend({
     this.status = Loader.STATUS.WAITING;
   },
 
-  /* STATUS */
-
-  set_status: function(status) {
-    var old_status = this.status;
-
-    this.status = status;
-    
-    log.d('loader #' + this.id + ' status changed from ' + Loader.status_string(old_status) + ' to ' + Loader.status_string(status));
-    
-    this.fire('statuschange', { asset: this,
-                                old_status: old_status,
-                                status: status });
-  },
-  
-  get_status: function() {
-    return this.status;
-  },
-
-  /* GET STATUS */
-
   get_asset_by_url: function(url) {
     // TODO: handle relative paths in URL (possibly a url_simply function?)
     for(var i=0; i<this.assets.length; i++) {
@@ -49,6 +32,14 @@ var Loader = Thing.extend({
   },
 
   append: function(asset) {
+
+    if(arguments.length > 1) {
+      for(var i=0; i<arguments.length; i++) {
+        this.append(arguments[i]);
+      }
+      return;
+    }
+
     if(this.assets.indexOf(asset) >= 0) {
       log.w('attempted to append existing asset');
       return false;

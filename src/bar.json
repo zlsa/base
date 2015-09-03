@@ -1,0 +1,8 @@
+{
+  "name": "bar",
+  "string": "asdf",
+  "number": 83,
+  "array": [
+    3, 2, 1
+  ]
+}
