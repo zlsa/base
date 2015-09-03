@@ -17,11 +17,12 @@ LOG_TEXT[LOG.LEVEL_WARN]   = 'warn';
 LOG_TEXT[LOG.LEVEL_ERROR]  = 'error';
 
 var log = {
-  level: LOG.LEVEL_DEBUG,
   start: time(),
   messages: [],
   log: function(level, message, data) {
 
+    if(RELEASE_LEVEL == 'RELEASE') return;
+    
     log.messages.push({
       time: time(),
       level: level,
@@ -29,8 +30,8 @@ var log = {
       data: data
     });
 
-    if(TYPE == 'RELEASE') return;
-    
+    if(RELEASE_LEVEL == 'BETA') return;
+
     var elapsed = time() - log.start;
     console.log('[' + elapsed.toFixed(3) + 's] ' + LOG_TEXT[level].toUpperCase() + ': ' + message);
   },

@@ -1,13 +1,23 @@
 
-var TYPE = 'DEBUG';
+var RELEASE_LEVEL = 'DEBUG';
 
 // VERIFY:  all logging, all error checking
 // DEBUG:   all logging, less error checking
-// RELEASE: no logging, less error checking
+// BETA:    no logging, less error checking
+// RELEASE: no logging at all (not saved into array), less error checking
+
+/* LOADER */
 
 var loader = new Loader();
 
-$(document).ready(function() {
+/* 3D specific */
+var canvas = new Canvas();
+var scene = new Scene(canvas);
+var camera = new Camera();
+
+/* main */
+
+function main() {
   $(window).resize(resize);
   tick();
 
@@ -24,12 +34,19 @@ $(document).ready(function() {
     }
   });
 
-});
+  $(window).resize(resize);
+
+  resize();
+
+}
 
 function resize() {
-
+  canvas.resize([$(window).width(), $(window).height()]);
 }
 
 function tick() {
   requestAnimationFrame(tick);
 }
+
+
+$(document).ready(main);

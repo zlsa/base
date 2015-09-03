@@ -33,6 +33,8 @@ module.exports = function(grunt) {
       },
       dist: {
         src: [
+          'src/js/gl-matrix-min.js',
+          
           'src/js/class.js',
           'src/js/util.js',
           
@@ -43,6 +45,14 @@ module.exports = function(grunt) {
           
           'src/js/asset.js',
           'src/js/loader.js',
+          
+          'src/js/entity.js',
+          'src/js/camera.js',
+          'src/js/mesh.js',
+
+          'src/js/scene.js',
+          
+          'src/js/canvas.js',
           
           'src/js/asset-waiter.js',
           

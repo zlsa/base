@@ -58,7 +58,7 @@ var Status = Thing.extend({
   },
 
   status_string: function(status) {
-    return this.status_root.status_string(status);
+    return this.status_root.STATUS_STRING[status];
   }
 
 });
