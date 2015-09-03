@@ -63,14 +63,6 @@ module.exports = function(grunt) {
       }
     },
 
-    sass: {
-      dist: {
-        files: {
-          'build/bundle.css' : 'src/css/main.scss'
-        }
-      }
-    },
-
     copy: {
       
       main: {
@@ -100,6 +92,14 @@ module.exports = function(grunt) {
             dest: 'build/'
           },
           
+          // css
+          {
+            expand: true,
+            cwd: 'src/css/',
+            src: 'main.css',
+            dest: 'build/'
+          },
+          
         ],
 
       },
@@ -121,8 +121,8 @@ module.exports = function(grunt) {
         livereload: true
       },
       stylesheets: {
-        files: ['src/**/*.scss'],
-        tasks: ['stylesheets']
+        files: ['src/**/*.css'],
+        tasks: ['copy']
       },
       scripts: {
         files: 'src/js/**/*.js',
@@ -143,14 +143,12 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-copy');
-  grunt.loadNpmTasks('grunt-contrib-sass');
   
 //  grunt.registerTask('scripts', ['clean:scripts', 'concat', 'uglify']);
   grunt.registerTask('scripts', ['clean:scripts', 'concat']);
-  grunt.registerTask('styles',  ['clean:styles', 'sass']);
   grunt.registerTask('images',  []);
   
-  grunt.registerTask('build', ['clean:build', 'scripts', 'styles', 'copy', 'images', 'clean:temp']);
+  grunt.registerTask('build', ['clean:build', 'scripts', 'copy', 'images', 'clean:temp']);
 
   grunt.registerTask('default', ['build', 'connect', 'watch']);
   
