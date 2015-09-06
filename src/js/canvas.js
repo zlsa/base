@@ -36,6 +36,9 @@ var Canvas = Status.extend({
     
     this.canvas.width  = size[0];
     this.canvas.height = size[1]
+    
+    this.gl.viewportWidth  = this.canvas.width;
+    this.gl.viewportHeight = this.canvas.height;
 
     this.fire('resized', {
       canvas: this,

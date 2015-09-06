@@ -11,6 +11,7 @@ var Scene = Status.extend({
     this.root_status = Scene;
     this.type = 'scene';
 
+    this.buffers  = []; // used for render optimization
     this.entities = [];
 
     this.canvas = canvas;
@@ -26,7 +27,31 @@ var Scene = Status.extend({
     if(this.camera == null && entity.type == 'camera') {
       this.camera = entity;
     }
+  },
+  
+  init_gl: function() {
+    var gl = this.gl;
+    
+    gl.clearColor(0.0, 0.0, 0.0, 1.0);
+    gl.depthFunc(gl.LEQUAL);
+    gl.enable(gl.DEPTH_TEST);
+  },
+
+  clear: function() {
+    var gl = this.gl;
+
+    gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+  },
+
+  draw: function(scene) {
+    var gl = this.gl;
+    this.clear();
+
+    this.camera.update();
+
+    gl.viewport(0, 0, gl.viewportWidth, gl.viewportHeight);
   }
+  
   
 });
 

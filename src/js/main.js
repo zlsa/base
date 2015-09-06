@@ -45,6 +45,7 @@ function resize() {
 }
 
 function tick() {
+  scene.render();
   requestAnimationFrame(tick);
 }
 
